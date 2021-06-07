@@ -18,6 +18,7 @@ func (config *Config) Router(w http.ResponseWriter, req *http.Request) {
 	// Set Content Type and CORS headers
 	config.SetHeaders(w, req)
 
+	// NOTE: req.Method and config.Service.Method should be converted to same case to match
 	switch req.Method {
 	case config.Service.Method:
 		// Valid request to be processed by the Controller method

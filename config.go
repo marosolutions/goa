@@ -57,7 +57,7 @@ func ReadConfig() (config *Config) {
 	json.NewDecoder(configFile).Decode(&config)
 
 	config.Service.Path = strings.ToLower(config.Service.Path)
-	config.Service.Method = strings.ToLower(config.Service.Method)
+	config.Service.Method = strings.ToUpper(config.Service.Method)
 
 	return
 }

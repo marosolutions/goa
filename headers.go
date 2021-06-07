@@ -9,6 +9,6 @@ func (config Config) SetHeaders(w http.ResponseWriter, req *http.Request) {
 
 	// Set CORS Headers
 	w.Header().Set("Access-Control-Allow-Origin", config.Cors.AllowOrigins)
-	w.Header().Set("Access-Control-Allow-Methods", config.Service.Method+", options")
+	w.Header().Set("Access-Control-Allow-Methods", config.Service.Method+", OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", config.Cors.AllowHeaders)
 }

@@ -119,7 +119,7 @@ func (config *Config) AuthorizeToken(userEmail string, accountIDs []string) (aut
 		Join("LEFT OUTER JOIN roles ON roles.role_name = users.role_name").
 		Where(sq.Eq{"user_email": userEmail}).
 		Where(sq.Eq{"LOWER(roles.service_path)": config.Service.Path}).
-		Where(sq.Eq{"LOWER(roles.service_method)": config.Service.Method})
+		Where(sq.Eq{"UPPER(roles.service_method)": config.Service.Method})
 
 	// Find specific account ids when accountIDs present
 	if len(accountIDs) > 0 {
