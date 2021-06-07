@@ -60,14 +60,14 @@ func (config *Config) AuthorizeApiKey(apiKey string, accountIDs []string) (autho
 	// 	WHERE api_keys.api_key = $1
 	// 		AND api_keys.account_id IN UNNEST ($2)
 	// 		AND LOWER(roles.service_path) = $3
-	// 		AND LOWER(roles.service_method) = $4
+	// 		AND UPPER(roles.service_method) = $4
 	// `
 
 	query := psql.Select("account_id").From("api_keys").
 		Join("roles USING (role_name)").
 		Where(sq.Eq{"api_key": apiKey}).
 		Where(sq.Eq{"LOWER(roles.service_path)": config.Service.Path}).
-		Where(sq.Eq{"LOWER(roles.service_method)": config.Service.Method})
+		Where(sq.Eq{"UPPER(roles.service_method)": config.Service.Method})
 
 	// Find specific account ids when accountIDs present
 	if len(accountIDs) > 0 {
@@ -112,7 +112,7 @@ func (config *Config) AuthorizeToken(userEmail string, accountIDs []string) (aut
 	// 	WHERE Users.UserEmail = @user_email
 	// 		AND Users.AccountId IN UNNEST (@account_ids)
 	// 		AND LOWER(Roles.ServicePath) = @service_path
-	// 		AND LOWER(Roles.ServiceMethod) = @service_method
+	// 		AND UPPER(Roles.ServiceMethod) = @service_method
 	// `
 
 	query := psql.Select("account_id").From("users").
