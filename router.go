@@ -1,4 +1,4 @@
-package goapi
+package goa
 
 import (
 	"net/http"
