@@ -24,7 +24,7 @@ func (config *Config) newDBClient() *pgxpool.Pool {
 	if os.Getenv("DATABASE_URL") != "" {
 		connString = os.Getenv("DATABASE_URL")
 	} else {
-		connString = fmt.Sprintf("user=%v password=%v host=%v port=%v dbname=%v sslmode=none pool_max_conns=5",
+		connString = fmt.Sprintf("user=%v password=%v host=%v port=%v dbname=%v sslmode=disable pool_max_conns=5",
 			config.Database.Username,
 			config.Database.Password,
 			config.Database.Host,
