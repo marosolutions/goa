@@ -1,6 +1,7 @@
 package goa
 
 import (
+	"io"
 	"net/http"
 )
 
@@ -10,6 +11,7 @@ func (config *Config) Router(w http.ResponseWriter, req *http.Request) {
 
 	if req.URL.Path != config.Service.Path {
 		w.WriteHeader(http.StatusBadRequest)
+		io.WriteString(w, "{\"errors\": {\"base\": [\"invalid request path\"]}}")
 		return
 	}
 
@@ -25,5 +27,6 @@ func (config *Config) Router(w http.ResponseWriter, req *http.Request) {
 	default:
 		// Return a bad request error when the request method is invalid
 		w.WriteHeader(http.StatusBadRequest)
+		io.WriteString(w, "{\"errors\": {\"base\": [\"invalid request method\"]}}")
 	}
 }
