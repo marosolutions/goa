@@ -1,4 +1,4 @@
-module github.com/marosolutions/goapi
+module github.com/marosolutions/goa
 
 go 1.15
 
